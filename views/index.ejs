@@ -12,5 +12,22 @@
             <li><%= user.name %></li>
         <% }) %>
     </ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io(); 
+
+      socket.on("connect", () => {
+        console.log("Connected to server! Client ID:", socket.id);
+        
+        socket.emit("join_room", "gaming-lounge");
+      });
+
+=      socket.on("message", (data) => {
+        console.log("Server says:", data);
+        
+        alert("Received from server: " + data);
+      });
+    </script>
 </body>
 </html>
